@@ -1,4 +1,4 @@
-package com.cnddriver;
+package com.brimatech.cnddriver;
 
 import com.facebook.react.ReactActivity;
 

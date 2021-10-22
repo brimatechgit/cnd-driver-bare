@@ -1,4 +1,4 @@
-package com.cnddriver;
+package com.brimatech.cnddriver;
 
 import android.app.Application;
 import android.content.Context;

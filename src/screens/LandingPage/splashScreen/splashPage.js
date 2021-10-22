@@ -7,7 +7,7 @@ const SplashPage = ({navigation}) => {
 
     useEffect(() => {
         setTimeout(() => {
-            navigation.navigate(LandingPage)
+            navigation.navigate('LandingPage')
         }, 4000);
       }, []);
 

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, Pressable, CheckBox } from 'react-native';
+import { View, Text, TextInput, Pressable } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Card } from 'react-native-paper';
 import styles from './styles';
