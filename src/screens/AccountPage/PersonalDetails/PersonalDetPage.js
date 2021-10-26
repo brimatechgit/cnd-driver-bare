@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, Pressable,Image } from 'react-native';
+import { View, Text, TextInput, Pressable,Image, ScrollView } from 'react-native';
 import { Card } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import DropDownPicker from 'react-native-dropdown-picker';
 import styles from './styles';
 import ModalTester from '../../../components/DetailsCard/ResAddress/DetailsClass';
+import { Button } from 'react-native-elements';
 
 
 const PersonalPage = () => {
@@ -171,6 +172,9 @@ source={require('../../../assets/image/AccountSettings.png')} />
                         {/* <ModalTester title={value}></ModalTester> */}
                     </View>
                 </Card>
+
+
+                
                 
             </View>
             {/* have an error wen fields are empty */}

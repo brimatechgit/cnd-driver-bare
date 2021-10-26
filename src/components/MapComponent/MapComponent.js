@@ -265,7 +265,7 @@ source={require('../../assets/image/SOS.png')} />
                   // props.onModalClose;
                   // props.navigation.pop();
                   // props.navigation.navigate('Home')
-                  props.navigation.navigate(AccountPage)
+                  props.navigation.navigate('AccountPage')
                 
 
                 }
@@ -290,7 +290,7 @@ source={require('../../assets/image/GeneralSetting.png')} />
                     // props.onModalClose;
                     // props.navigation.pop();
                     // props.navigation.navigate('Home')
-                    props.navigation.navigate(AccountPage)
+                    props.navigation.navigate('AccountPage')
                   
                   }} style={{flexDirection: 'row',paddingTop: 10, right: "10%" }}>
                  <Image 

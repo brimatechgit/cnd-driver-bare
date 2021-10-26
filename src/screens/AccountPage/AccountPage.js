@@ -31,7 +31,7 @@ const AccountPage = props => {
             <View>
                 <Text style={{fontSize: 22, padding: 20, fontWeight:'bold'}}>General Settings</Text>
                 <View>
-                    <Pressable onPress={() => props.navigation.navigate(BookingsPage)} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
+                    <Pressable onPress={() => props.navigation.navigate("BookingsPage")} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
                         
                         
                     <Image 
@@ -44,7 +44,7 @@ source={require('../../assets/image/MyBookings.png')} />
                         <Icon name="chevron-forward" size={20}></Icon>
                         </View>
                     </Pressable>
-                    <Pressable onPress={() => props.navigation.navigate(ManageVehiclesPage)} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
+                    <Pressable onPress={() => props.navigation.navigate('ManageVehiclesPage')} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
                     <Image 
 style={{width: 45, height:45 }}
   resizeMode = 'contain'
@@ -56,7 +56,7 @@ source={require('../../assets/image/ManageVehicle.png')} />
                         </View>
                     </Pressable>
                     
-                    <Pressable onPress={() => props.navigation.navigate(EmergencyPage)} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
+                    <Pressable onPress={() => props.navigation.navigate('EmergencyPage')} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
                     <Image 
 style={{width: 45, height:45 }}
   resizeMode = 'contain'
@@ -71,7 +71,7 @@ source={require('../../assets/image/Emergency.png')} />
             <View>
                 <Text style={{fontSize: 22, padding: 20, fontWeight:'bold'}}>Account Settings</Text>
                 <View>
-                    <Pressable onPress={() => props.navigation.navigate(PersonalPage)} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
+                    <Pressable onPress={() => props.navigation.navigate('PersonalPage')} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
                     <Image 
 style={{width: 45, height:45 }}
   resizeMode = 'contain'
@@ -82,7 +82,7 @@ source={require('../../assets/image/AccountSettings.png')} />
                         <Icon name="chevron-forward" size={20}></Icon>
                         </View>
                     </Pressable>
-                    <Pressable onPress={() => props.navigation.navigate(ManageDocsPage)} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
+                    <Pressable onPress={() => props.navigation.navigate('ManageDocsPage')} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
                     <Image 
 style={{width: 45, height:45 }}
   resizeMode = 'contain'
@@ -98,7 +98,7 @@ source={require('../../assets/image/Document2.png')} />
             <View>
         <Text style={{fontSize: 22, padding: 20, fontWeight:'bold'}}>Payment</Text>
 
-        <Pressable onPress={() => props.navigation.navigate(BankDetailsPage)} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
+        <Pressable onPress={() => props.navigation.navigate('BankDetailsPage')} style={{padding: 5, flexDirection: 'row', elevation: 10}}>
         <Image 
 style={{width: 45, height:45 }}
   resizeMode = 'contain'
