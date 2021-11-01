@@ -90,14 +90,11 @@ const styles = StyleSheet.create({
     },
     button: {
         elevation: 3,
-        backgroundColor: 'white',
+        backgroundColor: 'none',
         borderRadius: 50,
-        height: 45,
-        width: '45%',
-        alignItems: 'center',
-        justifyContent: 'center',
         borderColor: 'teal',
         borderWidth: 1,
+        color:'white'
         
     },
 
