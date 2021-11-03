@@ -3,9 +3,46 @@ import styles from './styles';
 import { View, Text, TextInput, ScrollView, Pressable } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Card } from 'react-native-paper';
+import DocumentPicker from 'react-native-document-picker';
 
 
 const FicaDocsPage = () => {
+
+
+
+        async function chooseFile() {
+        
+        try {
+            const res = await DocumentPicker.pick({
+            
+            type: [DocumentPicker.types.allFiles],
+        });
+        
+        // console.log(
+        
+        // res.uri,
+        
+        // res.type, // mime type
+        
+        // res.name,
+        
+        // res.size,
+        
+        // );
+        
+        } catch (err) {
+        
+        if (DocumentPicker.isCancel(err)) {
+        
+        // User cancelled the picker, exit any dialogs or menus and move on
+        
+        } else {
+            throw err;
+        }
+        
+    }
+        
+}
 
     const [text, onChangeText] = React.useState("");
     const [resAdr, onChangeResAdr] = React.useState("");
@@ -33,46 +70,46 @@ const FicaDocsPage = () => {
                             <View style={{justifyContent: 'center', top: 30}}>
                             <View style={{flexDirection: 'row'}}>
                                 <Text style={styles.text}>Drivers License</Text>
-                                <View style={styles.iconCircle}>
+                                <Pressable style={styles.iconCircle} onPress={chooseFile}>
                                     <Text>
                                         <Icon name="plus" size={15} color="white"></Icon>
                                     </Text>
-                                </View>
+                                </Pressable>
                             </View>
                             <View style={{flexDirection: 'row'}}>
                                 <Text style={styles.text}>License Disc</Text>
-                                <View style={styles.iconCircle}>
+                                <Pressable style={styles.iconCircle} onPress={chooseFile}>
                                     <Text>
                                         <Icon name="plus" size={15} color="white"></Icon>
                                     </Text>
-                                </View>
+                                </Pressable>
                             </View>
                             <View style={{flexDirection: 'row'}}>
                                 <Text style={styles.text}>Vehicle Photo's </Text>
-                                <View style={styles.iconCircle}>
+                                <Pressable style={styles.iconCircle} onPress={chooseFile}>
                                     <Text>
                                         <Icon name="plus" size={15} color="white"></Icon>
                                     </Text>
-                                </View>
+                                </Pressable>
                             </View>
                             <View style={{flexDirection: 'row'}}>
                                 <Text style={styles.text}>Insurance Documents</Text>
-                                <View style={styles.iconCircle}>
+                                <Pressable style={styles.iconCircle} onPress={chooseFile}>
                                     <Text>
                                         <Icon name="plus" size={15} color="white"></Icon>
                                     </Text>
-                                </View>
+                                </Pressable>
                             </View>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={{alignItems:'center', }}>
                                     <Text style={styles.text}>Owner Affidavite</Text>
                                     <Text style={{fontSize:8, bottom:'5%'}}>(Only applicable if the vehicle is not yours)</Text>
                                 </View>
-                                <View style={styles.iconCircle}>
+                                <Pressable style={styles.iconCircle} onPress={chooseFile}>
                                     <Text>
                                         <Icon name="plus" size={15} color="white"></Icon>
                                     </Text>
-                                </View>
+                                </Pressable>
                             </View></View>
                             </Card>
                         </View>                     

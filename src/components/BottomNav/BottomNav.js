@@ -7,7 +7,7 @@ import { Button, Overlay } from 'react-native-elements';
 import { Switch } from 'react-native-switch';
 import {LogBox} from 'react-native';
 
-const BottomNav = () => {
+const BottomNav = ({navigation}) => {
 
   
 
@@ -43,7 +43,7 @@ LogBox.ignoreLogs(['Animated: `useNativeDriver` was not specified. This is a req
     useEffect(() => {
       setTimeout(() => {
           setVisible(true)
-      }, 6000);
+      }, 12000);
     }, []);
 
     return ( 
@@ -120,12 +120,12 @@ LogBox.ignoreLogs(['Animated: `useNativeDriver` was not specified. This is a req
 
                                 <View style={{alignItems:'center', justifyContent:'center'}}>
                                   {/* pickup location */}
-                                  <Text style={[styles.text, {paddingVertical:15}]}> 340 Rage Road Jetpark</Text>
+                                  <Text style={[styles.text, {paddingVertical:15}]}> 34 Mamelodi West, 5</Text>
 
                                   <View style={{flexDirection:'row'}}>
 
                                       {/* on accept navigate to navigation page */}
-                                    <Button title='Accept'  buttonStyle={{marginVertical:10, marginHorizontal:10, borderRadius:25, borderWidth:1, borderColor:'black', backgroundColor: 'transparent'}} titleStyle={{color:'black'}}></Button>
+                                    <Button title='Accept' onPress={() => navigation.navigate('NavigationPage')}  buttonStyle={{marginVertical:10, marginHorizontal:10, borderRadius:25, borderWidth:1, borderColor:'black', backgroundColor: 'transparent'}} titleStyle={{color:'black'}}></Button>
 
                                     {/* on decline, close modal and look for other requests */}
                                     <Button title='Decline' onPress={toggleModal} buttonStyle={{marginVertical:10, marginHorizontal:10, borderRadius:25, borderWidth:1, borderColor:'black', backgroundColor: 'transparent'}} titleStyle={{color:'black'}}></Button>

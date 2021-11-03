@@ -6123,6 +6123,13 @@ react-native-custom-dropdown@^1.0.1:
     prop-types "^15.7.2"
     react-native-vector-icons "^7.0.0"
 
+react-native-document-picker@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-document-picker/-/react-native-document-picker-7.1.1.tgz#87f573918eb46681d1a0be4292f3325c7feda5c2"
+  integrity sha512-lEgyfl+JbU/UCDu8UdagBrC5CC71WTfqCzWyGeALLZiXGHrCJo/5BMqWbAc9PSCeiqNMnFkjcybO/kws5gMkxA==
+  dependencies:
+    invariant "^2.2.4"
+
 react-native-dropdown-picker@^5.1.28:
   version "5.1.28"
   resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.1.28.tgz#c49a898ecff5baaf98770b35645d3fcef6049780"

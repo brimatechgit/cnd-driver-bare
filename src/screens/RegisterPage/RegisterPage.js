@@ -37,7 +37,7 @@ const RegisterPage = props => {
                 console.log('User account created & signed in!');
                 //add user to user collection
                         firestore()
-                        .collection('users')
+                        .collection('drivers')
                         .add({
                         name: fname.toString(),
                         surname: sname.toString(),
@@ -47,6 +47,8 @@ const RegisterPage = props => {
                             firestore().collection('users').doc(res.id).update({
                                 id: res.id,
                             })
+
+                            props.navigation.navigate('DocumentsPage')
                         })
                     })
                 .catch(error => {
@@ -103,7 +105,7 @@ const RegisterPage = props => {
                                 />
                                 <TextInput
                                     style={styles.input}
-                                    onChange={onChangeSname}
+                                    onChangeText={onChangeSname}
                                     value={sname}
                                     placeholder='Surname' 
                                 />
@@ -120,7 +122,7 @@ const RegisterPage = props => {
                                 <View style={{height: 50}}></View>
                                 <TextInput
                                     style={styles.inputLong}
-                                    onChange={onChangePassword}
+                                    onChangeText={onChangePassword}
                                     value={password}
                                     secureTextEntry
                                     placeholder='Password' 
@@ -140,14 +142,16 @@ const RegisterPage = props => {
                                 placeholder='+27'
                                 />
                             <TextInput
-                                    style={{borderBottomColor: 'teal',
-                                    borderBottomWidth: 1,
-                                    width: 180,
-                                    right: 200,
-                                    paddingBottom: 5,
-                                    margin: 10,
-                                    justifyContent: 'flex-start'}}
-                                    onChange={onChangeNumber}
+                                    style={{
+                                        borderBottomColor: 'teal',
+                                        borderBottomWidth: 1,
+                                        width: 180,
+                                        right: 200,
+                                        paddingBottom: 5,
+                                        margin: 10,
+                                        justifyContent: 'flex-start'
+                                    }}
+                                    onChangeText={onChangeNumber}
                                     value={number}
                                     placeholder='Mobile' 
                                     keyboardType='number-pad' 
@@ -169,7 +173,7 @@ const RegisterPage = props => {
 
                     <View style={{alignItems:'center', }}>
                         {/* <Button text='Register' navPage='DocumentsPage' navigation={props.navigation} ></Button> */}
-                        <Button title='Register' type='outline' buttonStyle={{borderRadius: 25, }} onPress={() => createUser()}></Button>
+                        <Button title='Register' type='outline' buttonStyle={{borderRadius: 25, borderColor: 'teal', backgroundColor: 'white' }} onPress={() => createUser()}></Button>
                     </View>
 
                     <View style={{height: 15}}></View>

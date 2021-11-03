@@ -36,6 +36,7 @@ import PersonalPage from './src/screens/AccountPage/PersonalDetails/PersonalDetP
 import LoginTerms from './src/screens/LoginPage/loginTerms/loginTerms';
 import BookingsPage from './src/screens/AccountPage/SupportPage/Bookings/BookingsPage';
 import BookingsSummary from './src/screens/AccountPage/SupportPage/Bookings/HistorySummary';
+import NavigationPage from './src/screens/NavPage/NavigationPage';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -47,6 +48,7 @@ function UserDrawerPage() {
   return (
     <Drawer.Navigator drawerContent={(props) => <CustomDrawerContent {...props} />}>
       <Drawer.Screen options={{headerShown: false}} name="HomePage" component={HomePage} />
+      <Drawer.Screen options={{headerShown: false}} name="NavigationPage" component={NavigationPage} />
       <Drawer.Screen options={{headerShown: false}} name="ManageDocsPage" component={ManageDocsPage} />
       <Drawer.Screen options={{headerShown: false}} name="BankDetailsPage" component={BankDetailsPage} />
       <Drawer.Screen options={{headerShown: false}} name="ChangePassword" component={ChangePassword} />
@@ -64,7 +66,9 @@ export default function App() {
         header: CustomNavigationBar,
       }}
       >
-        <Stack.Screen name="Home" component={UserDrawerPage} />
+        {/* <Stack.Screen name="Home" component={UserDrawerPage} /> */}
+        <Stack.Screen options={{headerShown: false}} name="HomePage" component={HomePage} />
+        <Stack.Screen options={{headerShown: false}} name="NavigationPage" component={NavigationPage} />
         <Stack.Screen options={{headerShown: false}} name="SplashPage"  component={SplashPage} />
         <Stack.Screen options={{headerShown: false}} name="LandingPage"  component={LandingPage} />
         <Stack.Screen name="LoginPage"  component={LoginPage} />
