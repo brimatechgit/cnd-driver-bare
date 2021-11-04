@@ -34,7 +34,7 @@ export const NavMapComponent = () => {
       
         origin={UserLocation}
         destination={DestinationLocation}
-        shouldSimulateRoute
+        // shouldSimulateRoute
         showsEndOfRouteFeedback
         onLocationChange={(event) => {
 

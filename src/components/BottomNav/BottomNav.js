@@ -43,7 +43,7 @@ LogBox.ignoreLogs(['Animated: `useNativeDriver` was not specified. This is a req
     useEffect(() => {
       setTimeout(() => {
           setVisible(true)
-      }, 12000);
+      }, 52000);
     }, []);
 
     return ( 

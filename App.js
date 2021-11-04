@@ -61,13 +61,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-      initialRouteName="SplashPage"
+      initialRouteName="LandingPage"
        screenOptions={{
         header: CustomNavigationBar,
       }}
       >
         {/* <Stack.Screen name="Home" component={UserDrawerPage} /> */}
-        <Stack.Screen options={{headerShown: false}} name="HomePage" component={HomePage} />
+        <Stack.Screen options={{headerShown: false}} name="Home" component={HomePage} />
         <Stack.Screen options={{headerShown: false}} name="NavigationPage" component={NavigationPage} />
         <Stack.Screen options={{headerShown: false}} name="SplashPage"  component={SplashPage} />
         <Stack.Screen options={{headerShown: false}} name="LandingPage"  component={LandingPage} />

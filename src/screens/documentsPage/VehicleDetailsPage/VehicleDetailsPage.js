@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './styles';
 import { View, Text, TextInput, ScrollView, Pressable, Image } from 'react-native';
 import { Card, RadioButton } from 'react-native-paper';
@@ -6,21 +6,47 @@ import Modal from "react-native-modal";
 import DropDownPicker from "react-native-custom-dropdown";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
+import { Button, Overlay } from 'react-native-elements';
 // import styles from './styles';
+
 
 
 const VehicleDetailsPage = (props) => {
 
-    const [text, onChangeText] = React.useState("");
-    const [resAdr, onChangeResAdr] = React.useState("");
-    const [email, onChangeEmail] = React.useState("");
-    const [sname, onChangeSname] = React.useState("");
-    const [moNumber, onChangeNumber] = React.useState(null);
+    let carsAdded = 0;
+
+    let carArray = [{
+        id: 0,
+        type: 'Cnd-Motor',
+        registration: 'FGL FF GP',
+        make: 'hondai',
+        model: '2016',
+        colour: 'red',
+    }] ;
+
+    const [myArray, updateMyArray] = useState([]);
+
+    const [make, onChangeMake] = React.useState("");
+    const [year, onChangeYear] = React.useState("");
+    const [colour, onChangeColour] = React.useState("");
+    const [model, onChangeModel] = React.useState("");
+    const [registration, onChangeNumber] = React.useState(null);
     const [IdNumber, onChangeId] = React.useState(null);
     const [checked, setChecked] = React.useState('No');
 
+    
+    const [visible, setVisible] = useState(false);
+    const [visible2, setVisible2] = useState(false);
+
+    const toggleOverlay = () => {
+        setVisible(!visible);
+    };
+    const toggleOverlay2 = () => {
+        setVisible(!visible2);
+    };
+
     const [isModalVisible, setModalVisible] = React.useState(false);
-    const [isModalVisibleMotor, setModalVisibleMotor] = React.useState(false);
+    const [isModalVisibleMotor, setModalVisibleMotor] = useState(false);
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
@@ -29,6 +55,22 @@ const VehicleDetailsPage = (props) => {
         setModalVisible(!isModalVisibleMotor);
     }
 
+
+    const pushToList = () => {
+        ++carsAdded;
+        updateMyArray( arr => [...arr,{
+            id: carsAdded,
+            type: checked,
+            registration: registration,
+            make: make,
+            model: model,
+            colour: colour,
+        }])
+
+        onChangeColour('')
+
+        console.log(myArray);
+    }
     
 
     return ( 
@@ -47,15 +89,15 @@ const VehicleDetailsPage = (props) => {
                                 <View style={styles.inputView}>
                         <TextInput
                             style={styles.input}
-                            onChangeText={onChangeText}
-                            value={text}
+                            onChangeText={onChangeMake}
+                            value={make}
                             placeholder='Make'
                             
                         />
                         <TextInput
                             style={styles.input}
-                            onChangeText={onChangeSname}
-                            value={sname}
+                            onChangeText={onChangeModel}
+                            value={model}
                             placeholder='Model'
                             
                         />
@@ -63,25 +105,24 @@ const VehicleDetailsPage = (props) => {
                     <View style={styles.inputView}>
                         <TextInput
                             style={styles.input}
-                            onChangeText={onChangeEmail}
-                            value={email}
+                            onChangeText={onChangeYear}
+                            value={year}
                             placeholder='Year'
                             
                         />
                         <TextInput
                             style={styles.input}
                             onChangeText={onChangeNumber}
-                            value={moNumber}
+                            value={registration}
                             placeholder='License Plate'
-                            keyboardType="numeric"
                             
                         />
                     </View>
                     <View style={styles.inputView}>
                         <TextInput
                             style={styles.input}
-                            onChangeText={onChangeResAdr}
-                            value={resAdr}
+                            onChangeText={onChangeColour}
+                            value={colour}
                             placeholder='Colour'
                             
                             
@@ -105,9 +146,9 @@ source={require('../../../assets/image/CnDBike.png')} />
                             </View>
                         </View>
                             <RadioButton
-                                value="Yes"
-                                status={ checked === 'Yes' ? 'checked' : 'unchecked' }
-                                onPress={() => {setChecked('Yes'), setModalVisible(true)}}
+                                value="CnD-Bike"
+                                status={ checked === 'CnD-Bike' ? 'checked' : 'unchecked' }
+                                onPress={() => {setChecked('CnD-Bike'), setVisible(true)}}
                             />
                         </View>
                         <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
@@ -126,9 +167,9 @@ source={require('../../../assets/image/CnDMotor.png')} />
                             </View>
                         </View>
                         <RadioButton
-                            value="No"
-                            status={ checked === 'No' ? 'checked' : 'unchecked' }
-                            onPress={() => {setChecked('No'), setModalVisibleMotor(true)}}
+                            value="CnD-Motor"
+                            status={ checked === 'CnD-Motor' ? 'checked' : 'unchecked' }
+                            onPress={() => {setChecked('CnD-Motor'), setVisible(true)}}
                         />
                         </View>
                         </View>
@@ -144,9 +185,9 @@ source={require('../../../assets/image/CnDMotor.png')} />
                                 </Card>
                             </View>                     
                         </View>     
-                <View style={styles.detailsTextCard}>
+                <View onPress={pushToList} style={styles.detailsTextCard}>
                         <Text style={{fontSize: 22, paddingRight: 10}}>Add Another Vehicle</Text>
-                        <View style={styles.iconCircle}><Pressable onPress={console.log('here')}><Text><Icon name="plus" size={20} color="black" /></Text></Pressable></View>
+                        <View style={styles.iconCircle}><Pressable onPress={pushToList}><Text><Icon name="plus" size={20} color="black" /></Text></Pressable></View>
                     </View>
 
                 <View style={{bottom: 25}}>
@@ -161,45 +202,31 @@ source={require('../../../assets/image/CnDMotor.png')} />
                    
 
                                     <View style={styles.list}>
+
                                         <Text style={{fontSize:13}}>Added Vehicles:</Text>
-                            
-                                        <View style={{flexDirection: 'row', justifyContent: 'space-between', margin:10}}>
-                                        <Image 
-style={{height:35, width:35 }}
-  resizeMode = 'contain'
-source={require('../../../assets/image/CnDBike.png')} />
-                                            
-                                            
-                                            <View style={{flexDirection:'row', right: '10%', justifyContent: 'center'}}>
-                                                <Text style={{justifyContent:'center', top:'5%'}}>Vehicle 1</Text>
-                                                <Card style={{elevation: 5, borderRadius: 50, justifyContent:'center', padding:5, left:'20%'}}>
-                                                    <Text>FGL FF GP</Text>
-                                                </Card>
+                                        {/* have a map list displaying all cars */}
 
-                                            </View>
+                                        { myArray && myArray.length > 1 ?  <View>{
+                                            myArray.map((car) => 
+                                            <View style={styles.carListItem}>
+                                                {car.type == 'Cnd-Bike' ? <Image 
+                                                style={{height:35, width:35 }}
+                                                resizeMode = 'contain'
+                                                source={require('../../../assets/image/CnDBike.png')} /> 
+                                                : <Image 
+                                                style={{height:35, width:35 }}
+                                                resizeMode = 'contain'
+                                                source={require('../../../assets/image/CnDMotor.png')} />  }
+                                                <View style={{flexDirection:'row', right: '10%', justifyContent: 'center'}}>
+                                                    <Text style={{justifyContent:'center', top:'5%'}}>{car.make}</Text>
+                                                    
+                                                    <Card style={{elevation: 5, borderRadius: 50, justifyContent:'center', padding:5, left:'20%'}}>
+                                                        <Text>{car.registration}</Text>
+                                                    </Card>
+                                                </View>
                                                 <MIcon name='edit' size={25}></MIcon>
-                                            
-                                        </View>
-                                        <View style={{flexDirection: 'row', justifyContent: 'space-between', margin:10}}>
-                                        <Image 
-style={{height:35, width:35 }}
-  resizeMode = 'contain'
-source={require('../../../assets/image/CnDBike.png')} />
-                                            
-                                            
-                                            
-                                            <View style={{flexDirection:'row', right: '10%', justifyContent: 'center'}}>
-                                                <Text style={{justifyContent:'center', top:'5%'}}>Vehicle 2</Text>
-                                                <Card style={{elevation: 5, borderRadius: 50, justifyContent:'center', padding:5, left:'20%'}}>
-                                                    <Text>FGL FF GP</Text>
-                                                </Card>
-
-                                            </View>
-                                                <MIcon name='edit' size={25}></MIcon>
-                                            
-                                        </View>
-                                    
-                                    
+                                            </View> ) }
+                                        </View>: <Text></Text> }
                                     </View>
                                 </View>
                                 </Card>
@@ -207,7 +234,9 @@ source={require('../../../assets/image/CnDBike.png')} />
                         </View>
             </View>
             <View style={{justifyContent: 'center',alignItems:'center', position:'absolute', top: '71%'}}>
-                <Pressable style={styles.button} onPress={() => props.navigation.pop()}>
+                <Pressable style={styles.button} onPress={() => 
+                    // add to db and pop 
+                    props.navigation.pop()}>
                     <Text style={{color: 'black', fontSize: 20}}>SUBMIT</Text>
                 </Pressable>
             </View>
@@ -216,6 +245,26 @@ source={require('../../../assets/image/CnDBike.png')} />
                 <View style={styles.textCard}><Text style={{fontSize: 22, paddingLeft: 10}}>Vehicle Details</Text></View>
                 <View style={styles.numCircle}><Text style={{fontSize: 25, color: 'white'}}>3</Text></View>
             </View>
+            
+
+            <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={{borderRadius:25}}>
+                    {checked == 'CnD-Bike' ? 
+                     <View style={{padding: 10, alignItems:'center'}}>
+                        <Text>CnD-Bike Dimensions</Text>
+                        <View style={{height:15}}></View>
+                        <Text style={{fontWeight:'bold', letterSpacing:0.9}}>53x29x56 | 0 - 20KGs</Text>
+                    </View>  
+                    :   <View style={{padding: 10, alignItems:'center'}}>
+                            <Text>CnD-Motor Dimensions</Text>
+                            <View style={{height:15}}></View>
+                            <Text style={{fontWeight:'bold', letterSpacing:0.9}}>106x58x112 | 0 - 50KGs</Text>
+                        </View>  
+                }
+            </Overlay>
+            
+
+            
+
 
             <Modal isVisible={isModalVisible}
                             hasBackdrop={false}
@@ -248,7 +297,7 @@ source={require('../../../assets/image/CnDBike.png')} />
 
                     
                     </Modal>
-            <Modal isVisible={isModalVisibleMotor}
+            {/* <Modal isVisible={isModalVisibleMotor}
                             hasBackdrop={false}
                         >
                             <View style={{
@@ -280,7 +329,7 @@ source={require('../../../assets/image/CnDBike.png')} />
 
 
                     
-                    </Modal>
+                    </Modal> */}
 
 
         </View>

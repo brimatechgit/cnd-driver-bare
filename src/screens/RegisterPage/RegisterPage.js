@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, Pressable } from 'react-native';
+import { View, Text, TextInput, Pressable, Dimensions } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import { Button } from 'react-native-elements';
 import TermsAndCo from '../../components/TermsAndC/TermsAndC';
@@ -143,7 +143,6 @@ const RegisterPage = props => {
                                 />
                             <TextInput
                                     style={{
-                                        borderBottomColor: 'teal',
                                         borderBottomWidth: 1,
                                         width: 180,
                                         right: 200,
@@ -160,7 +159,7 @@ const RegisterPage = props => {
                         <View style={{height: 50}}></View>
 
                 <View style={{ justifyContent:'center', alignItems: 'center',}}>
-                    <Text style={{textAlign: 'center'}}>By clicking sign up you agree to our <Pressable onPress={() => props.navigation.navigate(LoginTerms)}><Text style={{color: 'teal', textAlign: 'center'}}>Terms and Conditions</Text></Pressable></Text>
+                    <Text style={{textAlign: 'center'}}>By clicking sign up you agree to our <Pressable onPress={() => props.navigation.navigate('LoginTerms')}><Text style={{color: 'teal', textAlign: 'center'}}>Terms and Conditions</Text></Pressable></Text>
                 </View>
 
                 <View style={{height: 15}}></View>
@@ -173,7 +172,7 @@ const RegisterPage = props => {
 
                     <View style={{alignItems:'center', }}>
                         {/* <Button text='Register' navPage='DocumentsPage' navigation={props.navigation} ></Button> */}
-                        <Button title='Register' type='outline' buttonStyle={{borderRadius: 25, borderColor: 'teal', backgroundColor: 'white' }} onPress={() => createUser()}></Button>
+                        <Button title='Register' titleStyle={{color:'black'}} type='outline' buttonStyle={{borderRadius: 25, borderColor:'black',backgroundColor:'white', width: Dimensions.get('screen').width - 140 }} onPress={() => createUser()}></Button>
                     </View>
 
                     <View style={{height: 15}}></View>

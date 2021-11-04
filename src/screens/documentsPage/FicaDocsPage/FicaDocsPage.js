@@ -6,7 +6,7 @@ import { Card } from 'react-native-paper';
 import DocumentPicker from 'react-native-document-picker';
 
 
-const FicaDocsPage = () => {
+const FicaDocsPage = (props) => {
 
 
 
@@ -171,7 +171,7 @@ const FicaDocsPage = () => {
             </View>
             <View style={{height: 15}}></View>
             <View style={{justifyContent: 'center', alignItems: 'center', }}>
-                <Pressable style={styles.button} onPress={console.log('here')}>
+                <Pressable style={styles.button} onPress={() => props.navigation.pop()}>
                     <Text style={{color: 'black', fontSize: 20}}>SUBMIT</Text>
                 </Pressable>
             </View>

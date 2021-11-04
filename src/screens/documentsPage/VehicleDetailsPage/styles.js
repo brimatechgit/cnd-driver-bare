@@ -111,6 +111,10 @@ const styles = StyleSheet.create({
         paddingVertical: 5
     },
 
+    carListItem: {
+        flexDirection: 'row', justifyContent: 'space-between', margin:10
+    }
+
 })
 
 export default styles

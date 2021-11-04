@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, Pressable } from 'react-native';
 import AppBar from '../../components/AppBar/AppBar';
 import DocumentCard from '../../components/documentCard/documentCard';
 import LoginTerms from '../LoginPage/loginTerms/loginTerms';
 import styles from './ApprovalPage/styles';
+import firestore from '@react-native-firebase/firestore';
+
+import auth from '@react-native-firebase/auth';
 
 const DocumentsPage = ({navigation}) => {
+
+    const [docsSubmitted, onChangeDocs] = useState(true)
 
     const verifyText = 'We need to verify your documents to activate your account';
 
@@ -78,16 +83,24 @@ const DocumentsPage = ({navigation}) => {
 
 
 
-            <View style={{justifyContent: 'center', alignItems: 'center',elevation: 5}}>
+            { docsSubmitted ? <><View style={{justifyContent: 'center', alignItems: 'center',elevation: 5}}>
                 <Pressable style={styles.button} onPress={() => navigation.navigate('ApprovalPage')}>
                     <Text style={{color: 'black', fontSize: 18}}>Submit Registration</Text>
                 </Pressable>
-            </View>
+            </View> 
+            
             <View style={{height: 20}}></View>
             <View style={{alignItems:'center'}}>
 
             <Text style={{ fontSize: 11, justifyContent: 'center', textAlign: 'center', width: '65%'}}>{agreeText}</Text>
-            </View>
+            </View></>
+            : 
+                <View style={{justifyContent: 'center', alignItems: 'center',elevation: 5}}>
+                    <Pressable style={[styles.button, {borderColor:'red'}]} onPress={() => auth().signOut()}>
+                        <Text style={{color: 'red', fontSize: 18}}>Log out</Text>
+                    </Pressable>
+                </View> 
+            }
 
     </View>
         

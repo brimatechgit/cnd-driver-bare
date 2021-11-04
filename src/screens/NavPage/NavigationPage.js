@@ -1,14 +1,12 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { NavMapComponent } from '../../components/MapComponent/NavMapComponent';
 
-const NavigationPage = () => {
-    const [isModalVisible, setModalVisible] = useState(false);
-
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
+const NavigationPage = ({navigation}) => {
+   
     return ( 
         <View >
+
           
           <NavMapComponent navigation={navigation}> </NavMapComponent>
           {/* <MapComponent navigation={navigation}> </MapComponent> */}

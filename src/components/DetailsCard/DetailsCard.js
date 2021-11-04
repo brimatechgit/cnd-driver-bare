@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import { View, Text, TextInput, Pressable, Modal, Alert } from 'react-native';
+import { View, Text, TextInput, Pressable, Modal, Alert, ScrollView } from 'react-native';
 import { Card } from 'react-native-paper';
+import { Overlay } from 'react-native-elements'
 import DropDownPicker from 'react-native-dropdown-picker'
 import styles from './styles';
 import DetailsClass from './ResAddress/DetailsClass';
@@ -34,6 +35,12 @@ const DetailsCard = props => {
 
 
     const [modalVisible, setModalVisible] = useState(false);
+
+    const [visible, setVisible] = useState(false);
+
+    const toggleOverlay = () => {
+      setVisible(!visible);
+    };
 
     const changeVals = () => {
         if(value == 'Complex'){
@@ -142,7 +149,8 @@ const DetailsCard = props => {
                         </View>
                         <View>
 
-                        <View >
+                        <Pressable onPress={toggleOverlay}>
+                        <View pointerEvents="none">
                             {
 
                                 (value != 'House') ? <TextInput
@@ -155,17 +163,20 @@ const DetailsCard = props => {
                             }
 
                         </View>
+                        </Pressable>
 
-                        <View>
-                            {/* <Text>Street Name</Text> */}
-                            <TextInput
-                                style={styles.inputBottom}
-                                onChangeText={onChangeStreetName}
-                                value={streetName}
-                                placeholder='Street Name & Street no'  
-                            />
+                        <Pressable onPress={toggleOverlay}>
+                            <View pointerEvents="none">
+                                {/* <Text>Street Name</Text> */}
+                                <TextInput
+                                    style={styles.inputBottom}
+                                    onChangeText={toggleOverlay}
+                                    value={streetName}
+                                    placeholder='Street Name & Street no'  
+                                />
 
-                        </View>
+                            </View>
+                        </Pressable>
 
                         {/* <View >
                             {/* //should navigate to google search page 
@@ -196,6 +207,37 @@ const DetailsCard = props => {
                 <View style={styles.textCard}><Text style={{fontSize: 22, paddingLeft: 10}}>Personal Details</Text></View>
                 <View style={styles.numCircle}><Text style={{fontSize: 25, color: 'white'}}>1</Text></View>
             </View>
+
+
+            <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={{borderRadius: 25, padding:25}}>
+                <View>
+                    <View >
+                            {
+
+                                (value != 'House') ? <TextInput
+                                    style={{width:'100%', borderBottomWidth:1}}
+                                    onChangeText={onChangeComplex}
+                                    value={complex}
+                                    placeholder={placeVal}
+                                /> : null
+                                
+                            }
+
+                        </View>
+
+
+                    <View >
+                                {/* <Text>Street Name</Text> */}
+                                <TextInput
+                                   style={{width:'100%', borderBottomWidth:1}}
+                                    onChangeText={toggleOverlay}
+                                    value={streetName}
+                                    placeholder='Street Name & Street no'  
+                                />
+
+                            </View>
+                </View>
+            </Overlay>
 
 
         </View>
