@@ -10,10 +10,11 @@ import { Card } from 'react-native-paper';
 import Octicons from 'react-native-vector-icons/Octicons';
 import PulseCircleLayer from '../PulseCircleLayer';
 import CenteringButtonMap from '../CenteringButtonMap'
+import GetLocation from 'react-native-get-location'
 
 import MapboxGL from "@react-native-mapbox-gl/maps";
 
-MapboxGL.setAccessToken("sk.eyJ1IjoidHNoZXBhbmdicmltYSIsImEiOiJja3VsZ3FkMjcxM2s0MndvNmRubzZvcmR0In0.KKEC8difxqkQxrK1REMvZQ");
+MapboxGL.setAccessToken("sk.eyJ1IjoidXNlcnBhbSIsImEiOiJja3ZxOHFrNHgyZ3l1MnV0a2U0MGo3MjFzIn0.vLexBB-0LBc2EkIyOQwWaQ");
 
 
 // Coordinates
@@ -30,6 +31,10 @@ const MapComponent = props => {
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [isModalVisibleSOS, setModalVisibleSOS] = useState(false);
+
+
+  const [currLoc, setCurrLoc] = useState(0);
+  const [currLong, setCurrLong] = useState(0);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible, );
@@ -57,28 +62,47 @@ const MapComponent = props => {
   let [started, setStarted] = useState(false);
   let [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchRoute = async () => {
-      const reqOptions = {
-        waypoints: [
-          {coordinates: StartLocation},
-          {coordinates: DestinationLocation},
-        ],
-        profile: 'walking',
-        geometries: 'geojson',
-      };
-      const res = await directionsClient.getDirections(reqOptions).send();
-      const newRoute = makeLineString(res.body.routes[0].geometry.coordinates);
-      setRoute(newRoute);
-    };
-    started && fetchRoute();
-  }, [started]);
+  // GetLocation.getCurrentPosition({
+  //   enableHighAccuracy: true,
+  //   timeout: 15000,
+  // })
+  // .then(location => {
+  //     setCurrLoc(location.latitude );
+  //     setCurrLong(location.longitude );
+  //     setUserLocation(currLoc);
+  //     setUserLocation([...userLocation, currLong])
+  //     CenterCoordinate = userLocation;
+  //     // userLocation.push(currLong)
+  //     console.log(userLocation)
+  //     // console.log(location);
+  // })
+  // .catch(error => {
+  //     const { code, message } = error;
+  //     console.warn(code, message);
+  // })
 
-  // Action to center the map on user position
-  const centeringButtonPress = () => {
-    _camera.flyTo(userLocation, 1500);
-    _camera.zoomTo(14);
-  };
+  // useEffect(() => {
+  //   const fetchRoute = async () => {
+  //     const reqOptions = {
+  //       waypoints: [
+  //         {coordinates: StartLocation},
+  //         {coordinates: DestinationLocation},
+  //       ],
+  //       profile: 'walking',
+  //       geometries: 'geojson',
+  //     };
+  //     const res = await directionsClient.getDirections(reqOptions).send();
+  //     const newRoute = makeLineString(res.body.routes[0].geometry.coordinates);
+  //     setRoute(newRoute);
+  //   };
+  //   started && fetchRoute();
+  // }, [started]);
+
+  // // Action to center the map on user position
+  // const centeringButtonPress = () => {
+  //   _camera.flyTo(userLocation, 1500);
+  //   _camera.zoomTo(14);
+  // };
 
   // Update userposition on update location
   const onUserLocationUpdate = newUserLocation => {
@@ -88,59 +112,59 @@ const MapComponent = props => {
     ]);
   };
 
-  const onStop = () => {
-    setRoute(null);
-    setStarted(false);
-  };
+  // const onStop = () => {
+  //   setRoute(null);
+  //   setStarted(false);
+  // };
 
-  const renderDestinationPoint = () => {
-    return DestinationLocation && DestinationLocation.length > 0 && started ? (
-      <MapboxGL.PointAnnotation
-        id="destination"
-        title="destination location"
-        coordinate={DestinationLocation}>
-        <View style={styles.circle}>
-          <View style={styles.innerCircle}>
-            <View style={styles.dotCircle} />
-          </View>
-        </View>
-      </MapboxGL.PointAnnotation>
-    ) : null;
-  };
+  // const renderDestinationPoint = () => {
+  //   return DestinationLocation && DestinationLocation.length > 0 && started ? (
+  //     <MapboxGL.PointAnnotation
+  //       id="destination"
+  //       title="destination location"
+  //       coordinate={DestinationLocation}>
+  //       <View style={styles.circle}>
+  //         <View style={styles.innerCircle}>
+  //           <View style={styles.dotCircle} />
+  //         </View>
+  //       </View>
+  //     </MapboxGL.PointAnnotation>
+  //   ) : null;
+  // };
 
-  const renderStart = () => {
-    return StartLocation.length > 0 && started ? (
-      <MapboxGL.PointAnnotation
-        id="start"
-        title="start location"
-        coordinate={StartLocation}>
-        <View style={styles.circle}>
-          <View style={styles.innerCircle}>
-            <View style={styles.dotCircle} />
-          </View>
-        </View>
-      </MapboxGL.PointAnnotation>
-    ) : null;
-  };
+  // const renderStart = () => {
+  //   return StartLocation.length > 0 && started ? (
+  //     <MapboxGL.PointAnnotation
+  //       id="start"
+  //       title="start location"
+  //       coordinate={StartLocation}>
+  //       <View style={styles.circle}>
+  //         <View style={styles.innerCircle}>
+  //           <View style={styles.dotCircle} />
+  //         </View>
+  //       </View>
+  //     </MapboxGL.PointAnnotation>
+  //   ) : null;
+  // };
 
-  const renderRoute = () => {
-    return route ? (
-      <MapboxGL.ShapeSource id="routeSource" shape={route}>
-        <MapboxGL.LineLayer id="routeFill" style={layerStyles.route} />
-      </MapboxGL.ShapeSource>
-    ) : null;
-  };
+  // const renderRoute = () => {
+  //   return route ? (
+  //     <MapboxGL.ShapeSource id="routeSource" shape={route}>
+  //       <MapboxGL.LineLayer id="routeFill" style={layerStyles.route} />
+  //     </MapboxGL.ShapeSource>
+  //   ) : null;
+  // };
 
-  // Start Button
-  const renderActions = () => (
-    <TouchableOpacity
-      style={styles.startRouteButton}
-      onPress={() => !started ? setStarted(true) : onStop()}>
-      <Text style={styles.text}>
-        {!started ? 'Start' : 'Stop'}
-      </Text>
-    </TouchableOpacity>
-  );
+  // // Start Button
+  // const renderActions = () => (
+  //   <TouchableOpacity
+  //     style={styles.startRouteButton}
+  //     onPress={() => !started ? setStarted(true) : onStop()}>
+  //     <Text style={styles.text}>
+  //       {!started ? 'Start' : 'Stop'}
+  //     </Text>
+  //   </TouchableOpacity>
+  // );
 
     return ( 
             <View style={styles.container}>
@@ -169,32 +193,32 @@ const MapComponent = props => {
 
     <MapboxGL.MapView style={styles.map} 
 
-    showUserLocation={true}
+    // showUserLocation={true}
     logoEnabled={false}
     compassEnabled={false}
-    zoomEnabled={true}
+    // zoomEnabled={true}
 
     // initialCenterCoordinate={[40.444328, -79.953155]}
     >
 <MapboxGL.Camera
-    zoomLevel={14}
+    zoomLevel={15}
     animationMode="flyTo"
     animationDuration={0}
-    centerCoordinate={CenterCoordinate}
+    centerCoordinate={userLocation}
     followUserLocation={false}
-    defaultSettings={{
-      centerCoordinate: CenterCoordinate,
-      followUserLocation: false,
-      followUserMode: 'normal',
-    }}
+    // defaultSettings={{
+    //   centerCoordinate: CenterCoordinate,
+    //   followUserLocation: false,
+    //   followUserMode: 'normal',
+    // }}
     />
 
-      {/* <MapboxGL.UserLocation
+      <MapboxGL.UserLocation
       visible={true}
       onUpdate={newUserLocation =>
       onUserLocationUpdate(newUserLocation)
       }
-      /> */}
+      />
 
 
 <MapboxGL.MarkerView id={"marker"} coordinate={userLocation}>

@@ -37,6 +37,8 @@ import LoginTerms from './src/screens/LoginPage/loginTerms/loginTerms';
 import BookingsPage from './src/screens/AccountPage/SupportPage/Bookings/BookingsPage';
 import BookingsSummary from './src/screens/AccountPage/SupportPage/Bookings/HistorySummary';
 import NavigationPage from './src/screens/NavPage/NavigationPage';
+import SenderArrivedPage from './src/screens/SenderArrivedPage/SenderArrivedPage';
+import DropOffNavPage from './src/screens/NavPage/DropOffNavPage';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -69,6 +71,7 @@ export default function App() {
         {/* <Stack.Screen name="Home" component={UserDrawerPage} /> */}
         <Stack.Screen options={{headerShown: false}} name="Home" component={HomePage} />
         <Stack.Screen options={{headerShown: false}} name="NavigationPage" component={NavigationPage} />
+        <Stack.Screen options={{headerShown: false}} name="DropOffNavPage" component={DropOffNavPage} />
         <Stack.Screen options={{headerShown: false}} name="SplashPage"  component={SplashPage} />
         <Stack.Screen options={{headerShown: false}} name="LandingPage"  component={LandingPage} />
         <Stack.Screen name="LoginPage"  component={LoginPage} />
@@ -93,6 +96,7 @@ export default function App() {
         <Stack.Screen  name="AccountSettings" component={AccountSettings} />
         <Stack.Screen  name="BookingsPage" component={BookingsPage} />
         <Stack.Screen  name="BookingsSummary" component={BookingsSummary} />
+        <Stack.Screen  name="SenderArrivedPage" component={SenderArrivedPage} />
         <Stack.Screen  name="CndTerms" component={CndTerms} />
         <Stack.Screen options={{headerShown: false}}  name="AccountPage" component={AccountPage} />
         {/* <Stack.Screen options={{headerShown: false}}  name="AccountPage" component={UserDrawerPage} /> */}

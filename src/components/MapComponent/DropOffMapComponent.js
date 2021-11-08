@@ -1,29 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Dimensions, Image, TouchableOpacity,Text, Pressable } from 'react-native';
-import MapboxNavigation from '@homee/react-native-mapbox-navigation';
-import styles from './styles';
-import Modal from "react-native-modal";
-import { Card } from 'react-native-paper';
-import Octicons from 'react-native-vector-icons/Octicons';
-import Icon from 'react-native-vector-icons/Ionicons';
-import firestore from '@react-native-firebase/firestore';
+import React from 'react'
+import { View, Text } from 'react-native'
 
-
-
-//map navigation, caled after the driver has accepted an order
-//should get long and latitude values from db, and navigate the driver accordingly
-
-
-export const NavMapComponent = ({navigation, pickup, dropoff, userLocation, docID}) => {
-
-    
-
+const DropOffMapComponent = ({navigation, dropoff, docID, userlocation}) => {
     //locations should be dynamic
     const UserLocation = [28.225375324978117, -26.16299249170051]; // [longitude, latitude]
-    // const UserLocation = [userLocation]; // [longitude, latitude]
-    // const UserLocation = userLocation; // [longitude, latitude]
     const DestinationLocation = [28.429375324978117, -26.29299249170051,]; // [longitude, latitude]
-    // const DestinationLocation = [pickup['lat'], pickup['lng']]; // [longitude, latitude]
     const StartLocation = UserLocation;
     const CenterCoordinate = UserLocation;
     const [isModalVisibleSOS, setModalVisibleSOS] = useState(false);
@@ -39,27 +20,13 @@ export const NavMapComponent = ({navigation, pickup, dropoff, userLocation, docI
       <MapboxNavigation
       
         origin={UserLocation}
-        // destination={pickup}
-        destination={DestinationLocation}
-        shouldSimulateRoute
+        destination={pickup}
+        // shouldSimulateRoute
         // showsEndOfRouteFeedback
         onLocationChange={(event) => {
 
             //push these updates to db
           const { latitude, longitude } = event.nativeEvent;
-
-          console.log(userLocation)
-
-          firestore()
-          .collection('requests')
-          .doc(docID)
-          .update({
-            driverLocation: [latitude, longitude]
-          })
-          .then(() => {
-            console.log('driver loc updated !!!');
-            
-          });
         }}
         onRouteProgressChange={(event) => {
           const {
@@ -79,10 +46,6 @@ export const NavMapComponent = ({navigation, pickup, dropoff, userLocation, docI
         }}
         onArrive={() => {
           // Called when you arrive at the destination.
-          // navigation.navigate('SenderArrivedPage', {
-          //   dropoff: dropoff,
-          //   docID:docID
-          // })
         }}
       />
 
@@ -183,10 +146,6 @@ source={require('../../assets/image/SOS.png')} />
 
     </View>
   );
-};
+}
 
-// const styles = StyleSheet.create({
-//   container: {
-//     height: Dimensions.get('window').height -  45,
-//   },
-// });
+export default DropOffMapComponent
