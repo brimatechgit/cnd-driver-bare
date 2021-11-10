@@ -94,10 +94,17 @@ source={require('../../assets/image/MENU.png')} />
             </TouchableOpacity> */}
             
             <TouchableOpacity onPress={() => setModalVisibleSOS(true)} style={styles.overlay2}>
-            <Image 
-style={{width: 45, height:45 }}
-  resizeMode = 'contain'
-source={require('../../assets/image/SOS.png')} />
+              <Image 
+                style={{width: 45, height:45 }}
+                resizeMode = 'contain'
+                source={require('../../assets/image/SOS.png')} />
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => setModalVisibleSOS(true)} style={[styles.overlay2, {bottom: '12%'}]}>
+              <Image 
+                style={{width: 45, height:45 }}
+                resizeMode = 'contain'
+                source={require('../../assets/image/Message.png')} />
             </TouchableOpacity>
 
 
@@ -179,7 +186,7 @@ source={require('../../assets/image/SOS.png')} />
             </View>
 
 
-</Modal>
+            </Modal>
 
     </View>
   );

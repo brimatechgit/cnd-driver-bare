@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
           alignItems: 'center',
           justifyContent: 'center',
         position: 'absolute',
-        left: '82%',
+        left: '85%',
         bottom: '18%',
       },
       iconContainer: {
